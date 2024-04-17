@@ -17,7 +17,7 @@ def read_tif_frames(tif_path):
     return frames
 
 # Path to your .tif file
-tif_path = "TEST_MOVIE_00001-small-motion.tif"
+tif_path = "/content/drive/MyDrive/Neural_Signals_and_Computation_yzhan486/TEST_MOVIE_00001-small-motion.tif"
 
 # Read the frames from the .tif file
 frames = read_tif_frames(tif_path)
