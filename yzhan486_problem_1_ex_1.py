@@ -45,4 +45,3 @@ fig = go.Figure(
 # Show the figure
 fig.show()
 
-return fig
