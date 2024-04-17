@@ -22,7 +22,7 @@ tif_path = "/content/drive/MyDrive/Neural_Signals_and_Computation_yzhan486/TEST_
 # Read the frames from the .tif file
 frames = read_tif_frames(tif_path)
 
-frames = frames[0:100]
+frames = frames[0:10]
 # Setup initial frame
 fig = go.Figure(
     data=[go.Heatmap(z=frames[0])],
@@ -44,3 +44,5 @@ fig = go.Figure(
 
 # Show the figure
 fig.show()
+
+return fig
