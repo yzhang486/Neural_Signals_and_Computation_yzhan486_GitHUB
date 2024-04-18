@@ -1,5 +1,25 @@
 ## Part B
 from scipy.stats import skew
+import numpy as np
+import matplotlib.pyplot as plt
+import tifffile
+
+def read_tif_frames(tif_path):
+      # Use tifffile to open and read the tif file
+    with tifffile.TiffFile(tif_path) as tif:
+        # Assuming the image data is in the first page/series
+        # You might need to adjust this depending on your TIFF file structure
+        frames = tif.asarray()
+
+
+    return frames
+
+# Path to your .tif file
+tif_path = "/content/drive/MyDrive/Neural_Signals_and_Computation_yzhan486/TEST_MOVIE_00001-small.tif"
+
+# Read the frames from the .tif file
+frames = read_tif_frames(tif_path)
+
 ##  I would like to try standard deviation and skewness
 
 std_dev_img = np.std(frames, axis=0)
