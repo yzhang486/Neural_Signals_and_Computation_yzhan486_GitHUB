@@ -31,7 +31,7 @@ fig = go.Figure(
             type="buttons",
             buttons=[dict(label="Play",
                           method="animate",
-                          args=[None, {"frame": {"duration": 500, "redraw": True}, "fromcurrent": True}]),
+                          args=[None, {"frame": {"duration": 5, "redraw": True}, "fromcurrent": True}]),
                      dict(label="Pause",
                           method="animate",
                           args=[[None], {"frame": {"duration": 0, "redraw": False}, "mode": "immediate"}])])],
