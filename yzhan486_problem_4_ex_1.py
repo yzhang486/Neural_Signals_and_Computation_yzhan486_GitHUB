@@ -81,3 +81,7 @@ tif_path = "/content/drive/MyDrive/Neural_Signals_and_Computation_yzhan486/TEST_
 frames = read_tif_frames(tif_path)
 
 time_traces = extract_time_traces(frames, roi_masks)
+
+print(time_traces)
+plt.figure(figsize=(10,5))
+plt.plot(time_traces)
