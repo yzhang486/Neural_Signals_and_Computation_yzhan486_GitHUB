@@ -1,41 +1,44 @@
-## Problem 3 Drawing Regions of Interests (ROIs)
-
+## Problem 3
 
 import numpy as np
 import imageio
 from skimage.filters import threshold_otsu
-from skimage.measure import label, regionprops
-from skimage.color import label2rgb
+from scipy.ndimage import label, generate_binary_structure
+from skimage.measure import regionprops
 import matplotlib.pyplot as plt
 
 # Load the variance image
-variance_image_path = 'variance_image.tif'
-image = imageio.imread(variance_image_path)
+image_path = 'variance_image.tif'
+image = imageio.imread(image_path)
 
 # Apply Otsu's thresholding
 thresh = threshold_otsu(image)
 binary_image = image > thresh
 
 # Label connected components
-labeled_image = label(binary_image)
-regions = regionprops(labeled_image)
+structure = generate_binary_structure(2, 2)
+labeled_array, num_features = label(binary_image, structure=structure)
 
-# Select the 5 largest connected components based on area
-regions_sorted_by_area = sorted(regions, key=lambda x: x.area, reverse=True)
-largest_regions = regions_sorted_by_area[:5]
+# Select the 5 largest ROIs based on area
+props = regionprops(labeled_array)
+props.sort(key=lambda x: x.area, reverse=True)
+largest_props = props[:5]
 
-# Create an empty image to store the ROIs
-rois_image = np.zeros_like(image, dtype=np.uint8)
+# Initialize a list to hold the binary masks for each ROI
+roi_masks = []
 
-# Fill the ROIs image with the labels of the 5 largest regions
-for i, region in enumerate(largest_regions, start=1):
-    for coord in region.coords:
-        rois_image[coord[0], coord[1]] = i
+# Generate and visualize a binary mask for each ROI
+fig, axes = plt.subplots(1, 5, figsize=(20, 4))
+for i, prop in enumerate(largest_props):
+    # Create a binary mask for the ROI
+    roi_mask = np.zeros_like(image, dtype=bool)
+    roi_mask[labeled_array == prop.label] = True
+    roi_masks.append(roi_mask)
+    
+    # Visualization
+    axes[i].imshow(roi_mask, cmap='gray')
+    axes[i].set_title(f'ROI {i+1}')
+    axes[i].axis('off')
 
-# Visualize the original image with ROIs outlined
-plt.figure(figsize=(10, 5))
-plt.imshow(image, cmap='gray')
-plt.imshow(label2rgb(rois_image, bg_label=0, bg_color=None, colors=['red', 'green', 'blue', 'yellow', 'cyan']), alpha=0.5)
-plt.title('Variance Image with 5 ROIs Outlined')
-plt.axis('off')
+plt.tight_layout()
 plt.show()
