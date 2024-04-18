@@ -12,7 +12,7 @@ def read_tif_frames(tif_path):
     return frames
 
 ## Calculate mean, median and variance images
-def calculate_summary_images(frames)
+def calculate_summary_images(frames):
 	mean_img = np.mean(frames,axis=0)
 	median_img = np.median(frames, axis=0)
 	variance_img = np.var(frames, axis=0)
@@ -24,7 +24,7 @@ def calculate_summary_images(frames)
 
 	return mean_img, median_img, variance_img
 
-def plot_summary_images(mean_img, median_img, variance_img)
+def plot_summary_images(mean_img, median_img, variance_img):
 	# Visualization
 	fig, axes = plt.subplots(1, 3, figsize=(18, 6))
 
