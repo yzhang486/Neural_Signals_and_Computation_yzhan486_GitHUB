@@ -21,7 +21,7 @@ tif_path = "/content/drive/MyDrive/Neural_Signals_and_Computation_yzhan486/TEST_
 
 # Read the frames from the .tif file
 frames = read_tif_frames(tif_path)
-frames = frames[0:10]
+frames = frames[0:20]
 
 # Setup initial frame
 fig = go.Figure(
