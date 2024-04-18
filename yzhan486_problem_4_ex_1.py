@@ -6,7 +6,7 @@ import tifffile
 import imageio
 from skimage.filters import threshold_otsu
 from skimage.measure import label, regionprops
-from skimage.color import label2rgb
+from scipy.ndimage import label, generate_binary_structure
 import matplotlib.pyplot as plt
 
 
