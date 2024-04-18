@@ -6,7 +6,7 @@ import tifffile
 
 
 
-def std_skew_images(frames)
+def std_skew_images(frames):
 ##  I would like to try standard deviation and skewness
 
 	std_dev_img = np.std(frames, axis=0)
