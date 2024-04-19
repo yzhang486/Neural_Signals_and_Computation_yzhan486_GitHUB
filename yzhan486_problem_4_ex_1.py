@@ -31,3 +31,29 @@ def extract_time_traces(frames, roi_masks):
     
     return time_traces
 
+
+def plot_time_traces(time_traces):
+    # Generate sample data: 5 rows, 500 columns
+    data = time_traces
+
+    # Create a plot
+    plt.figure(figsize=(10, 6))
+
+    # Colors for different curves
+    colors = ['red', 'green', 'blue', 'orange', 'purple']
+    curve_names = ['ROI1','ROI2','ROI3','ROI4','ROI5']
+    # Plot each row of the array on the same graph
+    for i in range(np.shape(time_traces)[0]):
+        plt.plot(data[i], color=colors[i], label=curve_names[i])
+
+    # Add title and labels
+    plt.title('Time traces of the 5 ROIs')
+    plt.xlabel('Time')
+    plt.ylabel('Pixel intensities')
+    # Add a legend
+    plt.legend()
+
+    # Show the plot
+    plt.show()
+
+    
