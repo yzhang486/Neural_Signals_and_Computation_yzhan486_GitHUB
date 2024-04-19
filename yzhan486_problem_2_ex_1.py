@@ -74,3 +74,4 @@ def std_skew_images(frames):
 	plt.tight_layout()
 	plt.show()
 
+	return std_dev_img, skewness_img
