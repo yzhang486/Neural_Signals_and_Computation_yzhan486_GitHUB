@@ -16,12 +16,14 @@ def perform_pca(data, n_components=5):
     explained_variance = pca.explained_variance_ratio_
     return transformed_data, explained_variance, pca
 
-def plot_explained_variance(explained_variance, title='Explained Variance'):
-    plt.figure()
-    plt.plot(np.cumsum(explained_variance))
+def plot_results(metrics, title, ylabel):
+    plt.figure(figsize=(10, 5))
+    for key, values in metrics.items():
+        plt.plot(range(1, len(values)+1), values, label=key)
     plt.xlabel('Number of Components')
-    plt.ylabel('Cumulative Explained Variance')
+    plt.ylabel(ylabel)
     plt.title(title)
+    plt.legend()
     plt.grid(True)
     plt.show()
 
