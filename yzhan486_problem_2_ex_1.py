@@ -70,6 +70,9 @@ def std_skew_images(frames):
 	axes[1].imshow(skewness_img, cmap='gray')
 	axes[1].set_title('Skewness Image')
 	axes[1].axis('off')  # Hide axis ticks and labels
+## Write into TIF image files and save them for future use
+	tifffile.imwrite('STD_image.tif', std_dev_img.astype(np.float32))
+	tifffile.imwrite('skew_image.tif', skewness_img.astype(np.float32))
 
 	plt.tight_layout()
 	plt.show()
