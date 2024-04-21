@@ -83,7 +83,7 @@ def plot_images(images, title):
     plt.show()
 
 
-def plot_component_images(components_imgs):
+def plot_component_images(components_imgs,height, width):
     # Visualization
     fig, axes = plt.subplots(1, 3, figsize=(18, 6)) #Plot top 5 components always
 
