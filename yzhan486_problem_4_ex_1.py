@@ -11,16 +11,7 @@ import matplotlib.pyplot as plt
 
 
 def extract_time_traces(frames, roi_masks):
-    """
-    Extracts time traces of relative brightness for given ROIs across a sequence of frames.
-    
-    Parameters:
-    - frames: A 3D NumPy array of shape (num_frames, height, width), representing the sequence of frames.
-    - roi_masks: A list of 2D NumPy arrays, each of shape (height, width), representing the binary masks for each ROI.
-    
-    Returns:
-    - A list of 1D NumPy arrays, each representing the time-trace of relative brightness for an ROI.
-    """
+    # Time trace initialization
     time_traces = []
     for mask in roi_masks:
         # Ensure the mask is boolean for indexing
