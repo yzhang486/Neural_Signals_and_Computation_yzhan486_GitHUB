@@ -82,3 +82,27 @@ def plot_images(images, title):
     plt.suptitle(title)
     plt.show()
 
+
+def plot_component_images(components_imgs):
+    # Visualization
+    fig, axes = plt.subplots(1, 3, figsize=(18, 6)) #Plot top 5 components always
+
+    # Displaying the img 1
+    axes[0].imshow(components_imgs[0].reshape(height, width), cmap='gray')
+    axes[0].set_title('Component 1')
+    axes[0].axis('off')  # Hide axis ticks and labels
+
+    # Displaying the median image
+    axes[1].imshow(components_imgs[1].reshape(height, width), cmap='gray')
+    axes[1].set_title('Component 2')
+    axes[1].axis('off')  # Hide axis ticks and labels
+
+    # Displaying the variance image
+    axes[2].imshow(components_imgs[2].reshape(height, width), cmap='gray')
+    axes[2].set_title('Component 3')
+    axes[2].axis('off')  # Hide axis ticks and labels
+
+    # Show the summary images
+    plt.tight_layout()
+    plt.show()
+ 
