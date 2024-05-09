@@ -97,7 +97,7 @@ def extrapolate_dynamics_jPCA(initial_state, A_jpca, num_steps, dt):
     initial_state = normalize_initial_state(initial_state)
     trajectory = [initial_state]
     scaling_factor = 1e-3 #ensure initial state nonzero
-    skew_symm_exp = expm(A_jpca * dt * scaling_factor). #Take skewness into consideration
+    skew_symm_exp = expm(A_jpca * dt * scaling_factor) #Take skewness into consideration
     for _ in range(num_steps - 1):
         next_state = trajectory[-1] @ skew_symm_exp
         trajectory.append(next_state)
