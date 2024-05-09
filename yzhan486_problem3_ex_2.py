@@ -83,14 +83,23 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from scipy.io import loadmat
+from scipy.linalg import expm  
 import jPCA
 from jPCA.util import load_churchland_data, plot_projections
 
+# Function to normalize the initial state to prevent NAN being generated
+def normalize_initial_state(initial_state):
+    norm = np.linalg.norm(initial_state)
+    return initial_state / norm if norm != 0 else initial_state
 
+# Function to extrapolate dynamics using matrix exponentiation for jPCA
 def extrapolate_dynamics_jPCA(initial_state, A_jpca, num_steps, dt):
+    initial_state = normalize_initial_state(initial_state)
     trajectory = [initial_state]
+    scaling_factor = 1e-3 #ensure initial state nonzero
+    skew_symm_exp = expm(A_jpca * dt * scaling_factor). #Take skewness into consideration
     for _ in range(num_steps - 1):
-        next_state = trajectory[-1] @ (np.eye(A_jpca.shape[1]) + A_jpca.T * dt)
+        next_state = trajectory[-1] @ skew_symm_exp
         trajectory.append(next_state)
     return np.array(trajectory)
 
