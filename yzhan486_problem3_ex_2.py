@@ -108,6 +108,29 @@ def extrapolate_dynamics_jPCA(initial_state, A_jpca, num_steps, dt):
 def compare_projections(part_d_trajectories, part_e_trajectories, title_d='Part D (PCA)', title_e='Part E (jPCA)'):
     fig, axes = plt.subplots(1, 2, figsize=(15, 6))
 
+    # Part D Plot
+    for trajectory in part_d_trajectories:
+        pca = PCA(n_components=2)
+        trajectory_2d = pca.fit_transform(trajectory)
+        axes[0].plot(trajectory_2d[:, 0], trajectory_2d[:, 1], marker='o')
+    axes[0].set_title(title_d)
+    axes[0].set_xlabel('Principal Dimension 1')
+    axes[0].set_ylabel('Principal Dimension 2')
+    axes[0].grid(True)
+
+    # Part E Plot
+    for trajectory in part_e_trajectories:
+        pca = PCA(n_components=2)
+        trajectory_2d = pca.fit_transform(trajectory)
+        axes[1].plot(trajectory_2d[:, 0], trajectory_2d[:, 1], marker='o')
+    axes[1].set_title(title_e)
+    axes[1].set_xlabel('Principal Dimension 1')
+    axes[1].set_ylabel('Principal Dimension 2')
+    axes[1].grid(True)
+
+    plt.legend([f'Dataset {i+1}' for i in range(len(part_d_trajectories))], loc='best')
+    plt.tight_layout()
+    plt.show()
 
 # Compare Eigenspectra
 def plot_eigenspectra(A1, A2, title1='Matrix 1', title2='Matrix 2'):
