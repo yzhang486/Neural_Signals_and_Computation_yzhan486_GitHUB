@@ -128,7 +128,6 @@ def compare_projections(part_d_trajectories, part_e_trajectories, title_d='Part 
     axes[1].set_ylabel('Principal Dimension 2')
     axes[1].grid(True)
 
-    plt.legend([f'Dataset {i+1}' for i in range(len(part_d_trajectories))], loc='best')
     plt.tight_layout()
     plt.show()
 
