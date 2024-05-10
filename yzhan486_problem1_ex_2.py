@@ -59,11 +59,20 @@ def experiment_with_parameters(N, M, A, sigma_g):
     g_estimated = result.x
 
     # Plot true and estimated g
-    plt.figure()
-    plt.plot(g_true, 'b-', label='True g')
-    plt.plot(g_estimated, 'r--', label='Estimated g (MAP with smoothing)')
-    plt.legend()
-    plt.title(f'Estimation with A = {A:.2f}, M = {M}, N = {N}, sigma_g = {sigma_g:.2f}')
-    plt.xlabel('Index')
-    plt.ylabel('Tuning Curve Value')
+    fig, axs = plt.subplots(1, 2, figsize=(12, 5))
+    axs[0].plot(g_true, 'b-', label='True g')
+    axs[0].plot(g_estimated, 'r--', label='Estimated g (MAP with smoothing)')
+    axs[0].legend()
+    axs[0].set_title(f'Estimation with A = {A:.2f}, M = {M}, N = {N}, sigma_g = {sigma_g:.2f}')
+    axs[0].set_xlabel('Index')
+    axs[0].set_ylabel('Tuning Curve Value')
+
+    # Plot histogram of the spike counts
+    axs[1].hist(responses, bins='auto', density=True, alpha=0.7, color='g')
+    axs[1].set_title(f'Histogram of Spike Counts (Responses) with A = {A:.2f}, M = {M}')
+    axs[1].set_xlabel('Spike Counts')
+    axs[1].set_ylabel('Probability Density')
+
+    plt.tight_layout()
     plt.show()
+
