@@ -14,7 +14,7 @@ from scipy.io import loadmat
 def compute_time_steps(times):
     return np.mean(np.diff(times))
     
-# Define function to compute the Maximum Likelihood Estimation (MLE) of matrix A
+# Define function to compute the MLE of matrix A
 def estimate_A(datasets, time_list):
     sum_xt_xt1 = np.zeros((datasets[0].shape[1], datasets[0].shape[1]))
     sum_xt_xt = np.zeros((datasets[0].shape[1], datasets[0].shape[1]))
@@ -30,7 +30,7 @@ def estimate_A(datasets, time_list):
     return A_estimated
 
 
-# Function to predict the next state given current state and estimated A
+# Function to predict the next state with current state and estimated A
 def predict_next_state(x_t, A_estimated, dt):
     return x_t @ (np.eye(A_estimated.shape[0]) + A_estimated * dt)
 
@@ -40,7 +40,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from scipy.io import loadmat
-# Function to compute the time step between consecutive points
 
 
 # Function to apply PCA and keep top n components
@@ -50,7 +49,7 @@ def apply_pca(X, n_components=6):
     X_pca = pca.fit_transform(X_centered)
     return X_pca, pca
 
-# Function to compute the Maximum Likelihood Estimation (MLE) of matrix A
+# Function to compute the MLE of matrix A
 def estimate_A_pca(datasets_pca):
     n_components = datasets_pca[0].shape[1]
     sum_xt_xt1 = np.zeros((n_components, n_components))
@@ -69,7 +68,7 @@ def estimate_A_pca(datasets_pca):
 def predict_next_state_pca(x_t, A_estimated, dt):
     return x_t @ (np.eye(A_estimated.shape[0]) + A_estimated * dt)
 
-# Function to extrapolate the neural system forward in time
+# Function to extrapolate the neural system in time
 def extrapolate_dynamics(initial_state, A_estimated, num_steps, dt):
     trajectory = [initial_state]
     for _ in range(num_steps - 1):
