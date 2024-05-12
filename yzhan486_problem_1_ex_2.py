@@ -11,12 +11,11 @@ from scipy.optimize import minimize
 from numpy.linalg import norm
 
 def gausswin(N, alpha):
-    # An approximation of MATLAB's gausswin
+    # This function is an approximation of MATLAB's gausswin
     return gaussian(N, std=alpha*N/10)
 
 def custom_gausswin(N, alpha=2.5):
-    # Create a Gaussian window similar to MATLAB's gausswin
-    # alpha is set such that the window approximates MATLAB's behavior
+    # Create a customized Gaussian window similar to MATLAB's gausswin
     std = alpha * N / 10
     return gaussian(N, std=std, sym=False) * np.cos(2 * np.pi * np.arange(N) / 10)
 
@@ -58,7 +57,7 @@ def experiment_with_parameters(N, M, A, sigma_g):
     result = minimize(negLogPosterior, g_initial, method='BFGS')
     g_estimated = result.x
 
-    # Plot true and estimated g
+    # Plot true and estimated g for comparison
     fig, axs = plt.subplots(1, 2, figsize=(12, 5))
     axs[0].plot(g_true, 'b-', label='True g')
     axs[0].plot(g_estimated, 'r--', label='Estimated g (MAP with smoothing)')
